@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Nexus AI | Modern AI Tools Blog</title>
+  <!-- Google Fonts + Font Awesome 6 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f9fafc;
+      color: #1e1f2a;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    /* modern glass navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+      transition: all 0.2s ease;
+    }
+
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .logo h1 {
+      font-size: 1.7rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #1F2B6C, #4F46E5);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.3px;
+    }
+    .logo span {
+      font-size: 0.8rem;
+      font-weight: 500;
+      background: none;
+      color: #5b6e8c;
+      letter-spacing: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #2c3e50;
+      transition: 0.2s;
+      position: relative;
+      padding: 0.4rem 0;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: #4F46E5;
+    }
+
+    .nav-links a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 2.5px;
+      background: linear-gradient(90deg, #4F46E5, #818CF8);
+      border-radius: 4px;
+    }
+
+    /* mobile menu btn */
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      background: none;
+      border: none;
+      color: #1f2a44;
+      cursor: pointer;
+    }
+
+    /* main container sections */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem 4rem;
+    }
+
+    section {
+      scroll-margin-top: 90px;
+      margin-bottom: 5rem;
+    }
+
+    .hero-section {
+      text-align: center;
+      padding: 3rem 1rem 2rem;
+      background: radial-gradient(circle at 10% 30%, rgba(79,70,229,0.03), transparent);
+      border-radius: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-section h2 {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(to right, #1E293B, #3B3B98);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .hero-section p {
+      font-size: 1.2rem;
+      color: #475569;
+      max-width: 680px;
+      margin: 1rem auto 0;
+    }
+
+    .section-title {
+      font-size: 2.3rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      letter-spacing: -0.02em;
+      border-left: 5px solid #4F46E5;
+      padding-left: 1.2rem;
+    }
+
+    /* tools grid */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .tool-card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.6rem;
+      transition: all 0.25s ease;
+      box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.06);
+      border: 1px solid rgba(0,0,0,0.03);
+      cursor: default;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 36px -12px rgba(0, 0, 0, 0.12);
+      border-color: rgba(79,70,229,0.2);
+    }
+
+    .tool-icon {
+      font-size: 2.5rem;
+      background: #EEF2FF;
+      width: 55px;
+      height: 55px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 18px;
+      margin-bottom: 1.2rem;
+      color: #4F46E5;
+    }
+
+    .tool-card h3 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    .tool-badge {
+      display: inline-block;
+      background: #e6f7ec;
+      color: #0e7b32;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.2rem 0.8rem;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+    }
+
+    .tool-card p {
+      color: #334155;
+      line-height: 1.45;
+      margin: 0.8rem 0 1rem;
+    }
+
+    .tool-link {
+      text-decoration: none;
+      font-weight: 600;
+      color: #4F46E5;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: 0.2s;
+    }
+
+    .tool-link i {
+      font-size: 0.8rem;
+      transition: transform 0.2s;
+    }
+
+    .tool-link:hover i {
+      transform: translateX(4px);
+    }
+
+    /* about + contact */
+    .about-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 2rem;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.02);
+      border: 1px solid #edf2f7;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .about-text {
+      flex: 2;
+    }
+    .about-text h3 {
+      font-size: 1.7rem;
+      margin-bottom: 1rem;
+    }
+    .about-text p {
+      margin-bottom: 1rem;
+      color: #2d3a4b;
+      line-height: 1.5;
+    }
+    .about-stats {
+      flex: 1;
+      background: #f8fafc;
+      border-radius: 1.5rem;
+      padding: 1.2rem;
+    }
+    .stat-item {
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .contact-form {
+      background: white;
+      border-radius: 2rem;
+      padding: 2rem;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.04);
+      border: 1px solid #eef2ff;
+    }
+
+    .form-group {
+      margin-bottom: 1.4rem;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 1rem;
+      border-radius: 1rem;
+      border: 1px solid #e2e8f0;
+      font-family: 'Inter', sans-serif;
+      background: #ffffff;
+      transition: 0.2s;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #4F46E5;
+      box-shadow: 0 0 0 3px rgba(79,70,229,0.2);
+    }
+    .btn-submit {
+      background: #1F2B6C;
+      color: white;
+      border: none;
+      padding: 0.9rem 1.8rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-submit:hover {
+      background: #4F46E5;
+      transform: scale(0.98);
+      box-shadow: 0 10px 20px -5px rgba(79,70,229,0.4);
+    }
+
+    /* toast dynamic */
+    .toast-msg {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #1e293b;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 60px;
+      font-weight: 500;
+      backdrop-filter: blur(8px);
+      background: rgba(0,0,0,0.8);
+      z-index: 1200;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+      transition: opacity 0.2s;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* footer */
+    .footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      padding: 2.5rem 2rem;
+      margin-top: 3rem;
+      border-top-left-radius: 2rem;
+      border-top-right-radius: 2rem;
+    }
+    .footer-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .social-icons i {
+      font-size: 1.5rem;
+      margin-left: 1rem;
+      transition: 0.2s;
+      color: #94a3b8;
+    }
+    .social-icons i:hover {
+      color: white;
+    }
+
+    @media (max-width: 850px) {
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: rgba(255,255,255,0.97);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem 0;
+        gap: 1.5rem;
+        box-shadow: 0 12px 20px rgba(0,0,0,0.05);
+        transform: translateY(-150%);
+        transition: 0.3s ease-in-out;
+        z-index: 999;
+      }
+      .nav-links.show {
+        transform: translateY(0);
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .nav-container {
+        padding: 0.9rem 1.5rem;
+      }
+      .hero-section h2 {
+        font-size: 2rem;
+      }
+      .section-title {
+        font-size: 1.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="navbar">
+  <div class="nav-container">
+    <div class="logo">
+      <h1>Nexus AI <span>✦ intelligence lab</span></h1>
+    </div>
+    <button class="menu-toggle" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home" class="nav-link" data-section="home">Home</a></li>
+      <li><a href="#tools" class="nav-link" data-section="tools">Best AI Tools</a></li>
+      <li><a href="#about" class="nav-link" data-section="about">About Us</a></li>
+      <li><a href="#contact" class="nav-link" data-section="contact">Contact Us</a></li>
+    </ul>
+  </div>
+</div>
+
+<main class="container">
+  <!-- Home / Hero Section (dynamic blog vibe) -->
+  <section id="home">
+    <div class="hero-section">
+      <h2>AI revolution, <br>unlocked for free.</h2>
+      <p>Discover handpicked, battle-tested free AI tools that boost productivity, creativity, and automation. No hidden fees, just pure innovation.</p>
+      <div style="margin-top: 2rem;">
+        <i class="fas fa-arrow-down" style="color:#4F46E5; animation: bounce 2s infinite;"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEST FREE AI TOOLS SECTION (blog style cards) -->
+  <section id="tools">
+    <h2 class="section-title"><i class="fas fa-microchip" style="margin-right: 12px;"></i> Best free AI Tools — curated by experts</h2>
+    <div class="tools-grid" id="toolsGrid">
+      <!-- tools injected via js for dynamism but also hardcoded for reliability -->
+    </div>
+  </section>
+
+  <!-- ABOUT US SECTION -->
+  <section id="about">
+    <h2 class="section-title"><i class="fas fa-users"></i> About Us</h2>
+    <div class="about-content">
+      <div class="about-text">
+        <h3>We are AI enthusiasts & futurists</h3>
+        <p>Nexus AI was born from a simple idea: make advanced AI accessible to everyone. Our team tests hundreds of AI tools weekly to bring you only the best free solutions — from content generation to design, coding, and productivity.</p>
+        <p>We believe in transparency, deep reviews, and empowering creators, students, and businesses with zero-cost innovation. Our blog is visited by 50k+ monthly readers worldwide.</p>
+        <p><strong>✨ Mission:</strong> Democratize artificial intelligence and showcase tools that actually deliver value without a price tag.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-item"><i class="fas fa-check-circle" style="color:#4F46E5;"></i>  120+ AI tools reviewed</div>
+        <div class="stat-item"><i class="fas fa-globe"></i>  Trusted by 35+ countries</div>
+        <div class="stat-item"><i class="fas fa-chart-line"></i>  Updated weekly rankings</div>
+        <div class="stat-item"><i class="fas fa-award"></i>  No sponsors, honest picks</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT US SECTION -->
+  <section id="contact">
+    <h2 class="section-title"><i class="fas fa-paper-plane"></i> Contact Us</h2>
+    <div class="contact-form">
+      <p style="margin-bottom: 1.5rem;">Have suggestions, or want us to review a tool? Reach out — we reply within 24h.</p>
+      <form id="contactForm">
+        <div class="form-group">
+          <input type="text" id="name" placeholder="Your name *" required>
+        </div>
+        <div class="form-group">
+          <input type="email" id="email" placeholder="Email address *" required>
+        </div>
+        <div class="form-group">
+          <textarea rows="4" id="message" placeholder="Tell us about your favorite AI tool or any inquiry..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit"><i class="fas fa-message"></i> Send message</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div>© 2025 Nexus AI — Next‑gen AI blog. All opinions are independent.</div>
+    <div class="social-icons">
+      <i class="fab fa-twitter"></i>
+      <i class="fab fa-github"></i>
+      <i class="fab fa-linkedin"></i>
+      <i class="fab fa-discord"></i>
+    </div>
+  </div>
+</footer>
+
+<div id="toastMsg" class="toast-msg">✨ Message sent (demo)</div>
+
+<script>
+  // ======================== AI TOOLS DATA ==========================
+  const aiToolsList = [
+    {
+      name: "ChatGPT (Free)",
+      icon: "fa-regular fa-comment-dots",
+      badge: "⭐ Best overall",
+      desc: "Powerful conversational AI, writing, coding, brainstorming. Free tier with GPT-3.5 & limited GPT-4o.",
+      link: "#"
+    },
+    {
+      name: "Microsoft Copilot",
+      icon: "fa-brands fa-microsoft",
+      badge: "🔥 GPT-4 free",
+      desc: "Integrated with Edge & Bing, image creator, document summarizer — completely free with GPT-4.",
+      link: "#"
+    },
+    {
+      name: "Leonardo AI",
+      icon: "fa-solid fa-palette",
+      badge: "🎨 Art & Design",
+      desc: "Generate stunning images, assets for games, and cinematic art. 150 free credits daily.",
+      link: "#"
+    },
+    {
+      name: "Perplexity AI",
+      icon: "fa-solid fa-magnifying-glass",
+      badge: "🔍 Research",
+      desc: "AI-powered search engine with citations, real-time data, and Pro search for free users.",
+      link: "#"
+    },
+    {
+      name: "Hugging Face",
+      icon: "fa-solid fa-face-smile",
+      badge: "🧠 Open-source",
+      desc: "Thousands of free models, datasets, Spaces. Deploy NLP, vision, audio AI in seconds.",
+      link: "#"
+    },
+    {
+      name: "Canva Magic Studio",
+      icon: "fa-brands fa-canva",
+      badge: "✨ Design suite",
+      desc: "Magic Write, AI image generator, design automation — amazing free tier for creators.",
+      link: "#"
+    },
+    {
+      name: "Grammarly Free",
+      icon: "fa-solid fa-spell-check",
+      badge: "✍️ Writing",
+      desc: "AI grammar corrector, tone detector, clarity suggestions — essential for bloggers.",
+      link: "#"
+    },
+    {
+      name: "Krea AI (beta)",
+      icon: "fa-solid fa-bolt",
+      badge: "⚡ Real-time",
+      desc: "Real-time generative canvas & upscaling, free during beta, mind-blowing quality.",
+      link: "#"
+    }
+  ];
+
+  const toolsGrid = document.getElementById('toolsGrid');
+  function renderTools() {
+    if (!toolsGrid) return;
+    toolsGrid.innerHTML = '';
+    aiToolsList.forEach(tool => {
+      const card = document.createElement('div');
+      card.className = 'tool-card';
+      card.innerHTML = `
+        <div class="tool-icon"><i class="${tool.icon}"></i></div>
+        <h3>${tool.name}</h3>
+        <span class="tool-badge">${tool.badge}</span>
+        <p>${tool.desc}</p>
+        <a href="${tool.link}" class="tool-link" onclick="return false;">Discover tool <i class="fas fa-arrow-right"></i></a>
+      `;
+      // dummy click prevents navigation but feels interactive
+      const linkBtn = card.querySelector('.tool-link');
+      if(linkBtn) {
+        linkBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          showToast(`🔍 Explore ${tool.name} — demo link (dynamic preview)`);
+        });
+      }
+      toolsGrid.appendChild(card);
+    });
+  }
+
+  // toast system
+  const toast = document.getElementById('toastMsg');
+  function showToast(message) {
+    toast.textContent = message || "✨ Action completed";
+    toast.style.opacity = '1';
+    toast.style.pointerEvents = 'none';
+    setTimeout(() => {
+      toast.style.opacity = '0';
+    }, 2600);
+  }
+
+  // active link & smooth scroll + intersection observer for dynamic highlight
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  function removeActiveClass() {
+    navLinks.forEach(link => link.classList.remove('active'));
+  }
+
+  function setActiveBasedOnScroll() {
+    let current = '';
+    const scrollPos = window.scrollY + 120;
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionBottom = sectionTop + section.offsetHeight;
+      if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+        current = section.getAttribute('id');
+      }
+    });
+    if(current) {
+      removeActiveClass();
+      const activeLink = document.querySelector(`.nav-link[data-section="${current}"]`);
+      if(activeLink) activeLink.classList.add('active');
+    } else {
+      // fallback home
+      if(window.scrollY < 100) {
+        removeActiveClass();
+        const homeLink = document.querySelector('.nav-link[data-section="home"]');
+        if(homeLink) homeLink.classList.add('active');
+      }
+    }
+  }
+
+  // Smooth scroll + update active + close mobile menu
+  function handleNavClick(e) {
+    e.preventDefault();
+    const targetId = this.getAttribute('href').substring(1);
+    const targetSection = document.getElementById(targetId);
+    if(targetSection) {
+      targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // update active class immediately after click
+      removeActiveClass();
+      this.classList.add('active');
+      // close mobile menu if open
+      const mobileMenu = document.getElementById('navLinks');
+      if(mobileMenu.classList.contains('show')) {
+        mobileMenu.classList.remove('show');
+      }
+    }
+  }
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', handleNavClick);
+  });
+
+  // scroll event + highlight
+  window.addEventListener('scroll', () => {
+    setActiveBasedOnScroll();
+  });
+  window.addEventListener('load', () => {
+    setActiveBasedOnScroll();
+    renderTools();
+    // set home active at start
+    removeActiveClass();
+    const homeLink = document.querySelector('.nav-link[data-section="home"]');
+    if(homeLink) homeLink.classList.add('active');
+  });
+
+  // Mobile menu toggle
+  const menuBtn = document.getElementById('mobileMenuBtn');
+  const navMenu = document.getElementById('navLinks');
+  if(menuBtn) {
+    menuBtn.addEventListener('click', () => {
+      navMenu.classList.toggle('show');
+    });
+    document.querySelectorAll('.nav-link').forEach(ln => {
+      ln.addEventListener('click', () => {
+        if(navMenu.classList.contains('show')) navMenu.classList.remove('show');
+      });
+    });
+  }
+
+  // Contact form dynamic behaviour (no backend, but realistic)
+  const form = document.getElementById('contactForm');
+  if(form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nameInput = document.getElementById('name');
+      const emailInput = document.getElementById('email');
+      const msgInput = document.getElementById('message');
+      if(nameInput.value.trim() === '' || emailInput.value.trim() === '') {
+        showToast("⚠️ Please fill in name and email.");
+        return;
+      }
+      if(!emailInput.value.includes('@')) {
+        showToast("📧 Please enter a valid email address.");
+        return;
+      }
+      // simulate sending data
+      showToast(`✅ Thanks ${nameInput.value.split(' ')[0]}! Our team will get back soon. (demo)`);
+      form.reset();
+    });
+  }
+
+  // add extra dynamic micro-interaction: footer icons alert (just for dynamic feel)
+  const socialIcons = document.querySelectorAll('.social-icons i');
+  socialIcons.forEach(icon => {
+    icon.addEventListener('click', () => {
+      showToast(`🌐 Connect with us — community updates (demo mode)`);
+    });
+  });
+
+  // tool link inside cards already handled (all dynamic toast)
+  // also create cool bounce effect keyframes
+  const styleSheet = document.createElement("style");
+  styleSheet.textContent = `
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+  `;
+  document.head.appendChild(styleSheet);
+
+  // optional small dynamic date on footer (modern)
+  const footerDiv = document.querySelector('.footer-content div:first-child');
+  if(footerDiv) {
+    const year = new Date().getFullYear();
+    footerDiv.innerHTML = footerDiv.innerHTML.replace('2025', year);
+  }
+  
+  // smooth scroll adjustment for hash: if url contains #, scroll after load
+  if(window.location.hash) {
+    setTimeout(() => {
+      const hash = window.location.hash.substring(1);
+      const el = document.getElementById(hash);
+      if(el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  }
+</script>
+</body>
+</html>
